@@ -12,19 +12,21 @@ const { obtenerUsuarios } = require('./usuarios');
 const { eliminarUsuario } = require('./usuarios');
 const validar = require('./validar');
 const saltRounds = 10;
-mysql://root:lOReGIERKkiFiczdZDQzIIxmIsJGZRDr@monorail.proxy.rlwy.net:23479/railway
 
 app.use(cors({
-    origin: process.env.URLFRONTEND || 'http://localhost:5173',
+    origin: process.env.HOSTFRONTEND || 'http://localhost:5173',
     credentials: true
 }))
+
+const produccion = (process.env.NODE_ENV === 'production')
+
 app.use(session({
-    secret: process.env.SECRETSESSION || 'asadsadsdsajdljdahdhdkhaskldhlakdhlka',
-    proxy: process.env.NODE_ENV === 'production',
+    secret: 'asadsadsdsajdljdahdhdkhaskldhlakdhlka',
     cookie: {
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'none'
+        sameSite: 'none',
+        secure: produccion
     },
+    proxy: produccion
 }))
 
 app.get('/', (req, res) => {
