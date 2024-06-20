@@ -12,15 +12,16 @@ const { obtenerUsuarios } = require('./usuarios');
 const { eliminarUsuario } = require('./usuarios');
 const validar = require('./validar');
 const saltRounds = 10;
+mysql://root:lOReGIERKkiFiczdZDQzIIxmIsJGZRDr@monorail.proxy.rlwy.net:23479/railway
 
 app.use(cors({
     origin: process.env.URLFRONTEND || 'http://localhost:5173',
     credentials: true
 }))
 app.use(session({
-    secret: process.env.SECRETSESSION ||'asadsadsdsajdljdahdhdkhaskldhlakdhlka',
+    secret: process.env.SECRETSESSION || 'asadsadsdsajdljdahdhdkhaskldhlakdhlka',
     proxy: process.env.NODE_ENV === 'production',
-    cookie: { 
+    cookie: {
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'none'
     },
